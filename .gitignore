@@ -1,5 +1,5 @@
-/key.pem
-/key.pub
-/keys.json
-/openid-configuration.json
-/uami_client_id.guid
+key.pem
+key.pub
+keys.json
+openid-configuration.json
+uami_client_id.guid
