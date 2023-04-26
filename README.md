@@ -103,7 +103,11 @@ uami_client_id="$( az identity show \
 echo -n "${uami_client_id}" > uami_client_id.guid
 ```
 
-## Setup
+After the setup, we have our fake IdP configured:
+
+![The federated credential](images/uami-federated-cred.png)
+
+## Run
 
 ```shell
 #!/bin/bash
