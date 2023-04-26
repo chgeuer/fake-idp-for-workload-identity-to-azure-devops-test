@@ -191,3 +191,69 @@ curl --silent --get \
    | jq .
 ```
 
+## Output
+
+### Self-issued token
+
+```json
+{
+  "typ": "JWT",
+  "alg": "RS256",
+  "kid": "key1"
+}
+{
+  "iss": "https://fakeidp.blob.core.windows.net/public",
+  "aud": "api://AzureADTokenExchange",
+  "sub": "OpenSSL self-issued",
+  "iat": 1682503455,
+  "exp": 1682507055
+}
+```
+
+### AAD token
+
+```json
+{
+  "typ": "JWT",
+  "alg": "RS256",
+  "x5t": "-KI3Q9nNR7bRofxmeZoXqbHZGew",
+  "kid": "-KI3Q9nNR7bRofxmeZoXqbHZGew"
+}
+{
+  "aud": "499b84ac-1321-427f-aa17-267ca6975798",
+  "iss": "https://sts.windows.net/5f9e748d-300b-48f1-85f5-3aa96d6260cb/",
+  "iat": 1682503156,
+  "nbf": 1682503156,
+  "exp": 1682589856,
+  "aio": "E2ZgYFjzoyNpn/GNXrbtM9n0H3g1AgA=",
+  "appid": "9ef3341a-9826-4675-869d-787e68284de4",
+  "appidacr": "2",
+  "idp": "https://sts.windows.net/5f9e748d-300b-48f1-85f5-3aa96d6260cb/",
+  "oid": "ba98e840-84c6-4df6-908b-e82ab5f714bc",
+  "rh": "0.AREAjXSeXwsw8UiF9TqpbWJgy6yEm0khE39CqhcmfKaXV5gRAAA.",
+  "sub": "ba98e840-84c6-4df6-908b-e82ab5f714bc",
+  "tid": "5f9e748d-300b-48f1-85f5-3aa96d6260cb",
+  "uti": "aPVcm-YctUWwmrBKAsQIAA",
+  "ver": "1.0"
+}
+```
+
+### Azure DevOps Service response
+
+```json
+{
+  "count": 1,
+  "value": [
+    {
+      "id": "d33c7892-cd26-4b0e-b297-96aff303bab6",
+      "name": "some-private-project",
+      "url": "https://dev.azure.com/chgpmsitest1/_apis/projects/d33c7892-cd26-4b0e-b297-96aff303bab6",
+      "state": "wellFormed",
+      "revision": 11,
+      "visibility": "private",
+      "lastUpdateTime": "2023-04-25T13:12:13.383Z"
+    }
+  ]
+}
+```
+
