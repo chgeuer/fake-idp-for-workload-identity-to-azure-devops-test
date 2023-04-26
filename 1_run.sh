@@ -22,8 +22,6 @@ header="$( echo "{}"                | \
   jq -c -M "."                      | \
   iconv --from-code=ascii --to-code=utf-8 )"
 
-token_validity_duration="+60 minute"
-
 payload="$( echo "{}" | \
   jq --arg x "${issuer_path}"                                    '.iss=$x'              | \
   jq --arg x "${audience}"                                       '.aud=$x'              | \
