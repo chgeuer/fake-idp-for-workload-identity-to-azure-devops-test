@@ -1,5 +1,11 @@
 # Sign-in to a user-assigned managed identity to interact with Azure DevOps
 
+## ADO Setup
+
+Created a UAMI and authorized it in Azure DevOps
+
+![UAMI is member of the project team in Azure DevOps](images/uami-is-member-of-group-in-azure-devops.png)
+
 ## Variables
 
 ```shell
