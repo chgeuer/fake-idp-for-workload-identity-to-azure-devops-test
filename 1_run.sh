@@ -45,7 +45,10 @@ self_issued_jwt="${toBeSigned}.${signature}"
 
 resource="https://management.azure.com/.default"
 
-azure_devops_appid="499b84ac-1321-427f-aa17-267ca6975798/.default"
+# azure_devops_appid="https://app.vssps.visualstudio.com" # This does not work
+# azure_devops_appid="$( az ad sp list --display-name "Azure DevOps" | jq -r '.[0].appId' )"
+azure_devops_appid="499b84ac-1321-427f-aa17-267ca6975798"
+azure_devops_appid="${azure_devops_appid}/.default"
 resource="${azure_devops_appid}"
 
 token_response="$( curl \
@@ -59,6 +62,8 @@ token_response="$( curl \
     --data-urlencode "scope=${resource}" \
     "https://login.microsoftonline.com/${aadTenant}/oauth2/v2.0/token" )"
 
+echo "${token_response}" | jq .
+
 access_token="$( echo "${token_response}" | jq -r ".access_token" )"
 
 echo "Self-issued token"
@@ -71,3 +76,4 @@ curl --silent --get \
    --url "https://dev.azure.com/${ado_organization}/_apis/projects" \
    --header "Authorization: Bearer ${access_token}" \
    | jq .
+
