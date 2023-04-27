@@ -46,6 +46,7 @@ self_issued_jwt="${toBeSigned}.${signature}"
 resource="https://management.azure.com/.default"
 
 # azure_devops_appid="https://app.vssps.visualstudio.com" # This does not work
+# Other people also looking for a nice URL: https://copdips.com/2023/01/calling-azure-rest-api.html and https://github.com/Azure/azure-cli/issues/7618#issuecomment-909822540
 # azure_devops_appid="$( az ad sp list --display-name "Azure DevOps" | jq -r '.[0].appId' )"
 azure_devops_appid="499b84ac-1321-427f-aa17-267ca6975798"
 azure_devops_appid="${azure_devops_appid}/.default"
@@ -60,7 +61,7 @@ token_response="$( curl \
     --data-urlencode "client_id=${uami_client_id}" \
     --data-urlencode "client_assertion=${self_issued_jwt}" \
     --data-urlencode "scope=${resource}" \
-    "https://login.microsoftonline.com/${aadTenant}/oauth2/v2.0/token" )"
+    --url "https://login.microsoftonline.com/${aadTenant}/oauth2/v2.0/token" )"
 
 echo "${token_response}" | jq .
 
@@ -74,6 +75,4 @@ jq -R 'split(".") | .[0],.[1] | @base64d | fromjson' <<< "${access_token}"
 echo "Service response"
 curl --silent --get \
    --url "https://dev.azure.com/${ado_organization}/_apis/projects" \
-   --header "Authorization: Bearer ${access_token}" \
-   | jq .
-
+   --header "Authorization: Bearer ${access_token}"
